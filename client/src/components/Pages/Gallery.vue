@@ -1,15 +1,18 @@
 <template>
-  <div>
-Gallery
-  </div>
+  <section>
+    <h2>Gallery</h2>
+  </section>
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {};
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+h2 {
+  text-align: center;
+}
+section {
+  color: white;
+}
 </style>

@@ -17,8 +17,14 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Texturina&display=swap');
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 html {
   font-family: 'Texturina', serif;
+  background-image: url('./assets/GLEART background1.jpg');
 }
 
 
