@@ -1,7 +1,8 @@
 <template>
   <the-navigation></the-navigation>
   <main>
-    <router-view></router-view>
+    <router-view>
+    </router-view>
   </main>
 </template>
 
@@ -25,7 +26,12 @@ export default {
 html {
   font-family: 'Texturina', serif;
   background-image: url('./assets/GLEART background1.jpg');
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+  /* background-repeat: no-repeat; */
+
 }
-
-
 </style>
