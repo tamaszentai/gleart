@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Home</h2>
+    <img id="homelogo" alt="logo" src="../../assets/GLEART_logo.png" />
     
   </section>
 </template>
@@ -16,5 +16,12 @@ h2 {
 
 section {
   color: white;
+}
+#homelogo {
+  display: block;
+  width: 30%;
+  margin-top: -2%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
