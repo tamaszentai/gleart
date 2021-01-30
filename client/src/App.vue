@@ -1,7 +1,10 @@
 <template>
   <the-navigation></the-navigation>
   <main>
-    <router-view>
+    <router-view v-slot="slotProps">
+      <transition name="fade-component" mode="out-in">
+        <component :is="slotProps.Component"></component>
+      </transition>
     </router-view>
   </main>
 </template>
@@ -32,6 +35,23 @@ html {
   background-size: cover;
   background-attachment: fixed;
   /* background-repeat: no-repeat; */
+}
 
+.fade-component-enter-from,
+.fade-component-leave-to {
+  opacity: 0;
+}
+
+.fade-component-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-component-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-component-enter-to,
+.fade-component-leave-from {
+  opacity: 1;
 }
 </style>

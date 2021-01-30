@@ -1,7 +1,6 @@
 <template>
   <section>
     <h2>Home</h2>
-    <p>{{ $store.state.home }}</p>
     
   </section>
 </template>
@@ -16,6 +15,6 @@ h2 {
 }
 
 section {
-  color: grey;
+  color: white;
 }
 </style>

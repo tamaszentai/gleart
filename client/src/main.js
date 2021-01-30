@@ -12,7 +12,7 @@ app.use(router);
 
 app.use(store);
 
-app.mount('#app')
-
-
+router.isReady().then(function() {
+  app.mount('#app');
+});
 
