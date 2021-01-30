@@ -25,7 +25,7 @@ export default {
 
 html {
   font-family: 'Texturina', serif;
-  background-image: url('./assets/GLEART background1.jpg');
+  background-image: url('./assets/GLEART_background1.jpg');
   height: 100vh;
   width: 100vw;
   position: relative;

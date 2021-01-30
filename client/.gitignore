@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+Lea.jpg
+GLEART_background1.jpg
 
 
 # local env files
