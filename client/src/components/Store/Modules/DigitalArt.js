@@ -26,11 +26,10 @@ export default {
   },
   mutations: {
     addNewImage(state,payload) {
-      const data = payload;
       const newImage = {
-        id: data.id,
-        title: data.title,
-        url: data.url
+        id: payload.id,
+        title: payload.title,
+        url: payload.url
       }
       state.dummyImages.push(newImage);
     },
