@@ -6,7 +6,6 @@
       </div>
       <div class="hero_info_container">
         <p class="hero_info_text">{{ getBio }}</p>
-        <base-button>Edit</base-button>
       </div>
     </div>
   </section>

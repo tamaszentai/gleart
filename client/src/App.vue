@@ -1,6 +1,6 @@
 <template>
-  <the-navigation></the-navigation>
   <main>
+    <the-navigation></the-navigation>
     <router-view v-slot="slotProps">
       <transition name="fade-component" mode="out-in">
         <component :is="slotProps.Component"></component>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Texturina&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Texturina&display=swap");
 
 * {
   box-sizing: border-box;
@@ -27,8 +27,8 @@ export default {
 }
 
 html {
-  font-family: 'Texturina', serif;
-  background-image: url('./assets/GLEART_background1.jpg');
+  font-family: "Texturina", serif;
+  background-image: url("./assets/GLEART_background1.jpg");
   height: 100vh;
   width: 100vw;
   position: relative;

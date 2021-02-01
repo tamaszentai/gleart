@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Admin</h2>
+    <h2>Login</h2>
   </section>
 </template>
 
