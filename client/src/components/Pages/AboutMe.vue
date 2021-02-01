@@ -29,7 +29,7 @@ h2 {
 }
 
 section {
-  color: white;
+  color: whitesmoke;
   margin: 0% 5%;
 }
 
@@ -54,5 +54,6 @@ section {
   margin: 2%;
   margin-top: 0;
   background-color: rgba(255, 255, 255, 0.1);
+  overflow: scroll;
 }
 </style>
