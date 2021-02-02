@@ -1,6 +1,6 @@
 <template>
   <footer>
-    Footer
+    Facebook logo, Instagram logo, Tiktok logo and others here
   </footer>
 </template>
 

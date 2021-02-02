@@ -17,7 +17,7 @@
       </li>
     
       <li>
-        <router-link to="/contact"><h2>CONTACT</h2></router-link>
+        <router-link to="/contact"><h2>MESSAGE ME</h2></router-link>
       </li>
     </ul>
   </header>
