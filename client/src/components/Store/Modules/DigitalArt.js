@@ -33,11 +33,18 @@ export default {
       }
       state.dummyImages.push(newImage);
     },
+    deleteImage(state, payload) {
+     const newState = state.dummyImages.filter(image => image.id !== payload);
+     state.dummyImages = newState;
+    }
   },
   actions: {
     addNewImage(context, payload) {
-       console.log(payload);
       context.commit('addNewImage', payload);
+    },
+    deleteImage(context, payload) {
+      console.log(payload);
+      context.commit('deleteImage', payload);
     }
   },
   getters: {

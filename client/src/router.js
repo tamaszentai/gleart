@@ -5,9 +5,9 @@ import AboutMe from "./components/Pages/AboutMe.vue";
 import DigitalArt from "./components/Pages/DigitalArt.vue";
 import TraditionalArt from "./components/Pages/TraditionalArt.vue";
 import Contact from "./components/Pages/Contact.vue";
-import Login from "./components/Pages/Login.vue";
-import EditAbout from "./components/Pages/EditAbout.vue";
-import EditDigitalArt from "./components/Pages/EditDigitalArt.vue";
+import Login from "./components/Pages/Admin/Login.vue";
+import EditAbout from "./components/Pages/Admin/EditAbout.vue";
+import EditDigitalArt from "./components/Pages/Admin/EditTraditionalArt.vue"
 
 const router = createRouter({
   history: createWebHistory(),

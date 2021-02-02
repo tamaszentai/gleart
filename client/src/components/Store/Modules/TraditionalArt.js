@@ -16,11 +16,32 @@ export default {
       ]
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    addNewImage(state,payload) {
+      const newImage = {
+        id: payload.id,
+        title: payload.title,
+        url: payload.url
+      }
+      state.dummyImages.push(newImage);
+    },
+    deleteImage(state, payload) {
+     const newState = state.dummyImages.filter(image => image.id !== payload);
+     state.dummyImages = newState;
+    }
+  },
+  actions: {
+    addNewImage(context, payload) {
+      context.commit('addNewImage', payload);
+    },
+    deleteImage(context, payload) {
+      console.log(payload);
+      context.commit('deleteImage', payload);
+    }
+  },
   getters: {
     getImages(state) {
       return state.dummyImages;
-    }
-  }
+    },
+  },
 }

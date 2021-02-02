@@ -1,7 +1,7 @@
 <template>
   <content>
     <ul>
-      <li v-for="image in getImages" :key="image.id">{{ image.title }} <img :src=image.url class="galleryCard"></li>
+      <li v-for="image in getImages" :key="image.id">{{ image.title }} <img :src=image.url class="galleryCard"><button @click="deleteImage(image.id)">Delete Image</button></li>
     </ul>
     <form @submit.prevent="addNewImage"> 
       <label>Id</label>
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     getImages() {
-      return this.$store.getters["digitalArt/getImages"];
+      return this.$store.getters["traditionalArt/getImages"];
     },
   },
   methods: {
@@ -37,10 +37,13 @@ export default {
           title: this.title,
           url: this.url
         }
-        this.$store.dispatch('digitalArt/addNewImage', image)
+        this.$store.dispatch('traditionalARt/addNewImage', image)
       } else {
         alert("One of the fields are empty!!!")
       }
+    },
+    deleteImage(id) {
+      this.$store.dispatch('traditionalArt/deleteImage', id)
     }
   }
 };

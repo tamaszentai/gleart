@@ -2,7 +2,7 @@
   <section>
     <div class="container">
       <div class="hero_image_container">
-        <img src="../../assets/Lea.jpg" class="hero_image" />
+        <img :src="getHeroImage" class="hero_image" />
       </div>
       <div class="hero_info_container">
         <p class="hero_info_text">{{ getBio }}</p>

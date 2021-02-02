@@ -45,7 +45,7 @@ export default {
       nunc condimentum luctus. Suspendisse neque orci, sagittis quis cursus porttitor, luctus non \
       ipsum. Nullam metus augue, tincidunt et sem et, tincidunt tristique eros. Donec arcu metus, \
       viverra ac blandit ac, hendrerit ut odio.",
-      heroImage: "../../assets/Lea.jpg",
+      heroImage: "https://scontent.flhr4-2.fna.fbcdn.net/v/t1.0-9/124716723_3602498166448637_6147776248570215012_n.jpg?_nc_cat=102&ccb=2&_nc_sid=09cbfe&_nc_ohc=3Ln555yr1csAX8Z24EX&_nc_ht=scontent.flhr4-2.fna&oh=3b43c131c11c6837629d3ef3e7872db5&oe=603F4FD3",
     };
   },
   mutations: {

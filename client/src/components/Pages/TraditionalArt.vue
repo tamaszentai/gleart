@@ -22,6 +22,6 @@ export default {
 }
 
 content {
-  color: whitesmoke
+  color: whitesmoke;
 }
 </style>
