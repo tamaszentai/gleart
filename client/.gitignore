@@ -9,6 +9,7 @@ GLEART_logo.png
 # local env files
 .env.local
 .env.*.local
+.env
 
 # Log files
 npm-debug.log*
