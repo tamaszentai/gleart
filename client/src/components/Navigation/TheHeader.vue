@@ -9,13 +9,13 @@
       </li>
       <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
       <li class="dropdown">
-        <router-link disabled to="digitalart"><h2>GALLERY</h2></router-link>
-          <div class="dropdown-content">
-        <router-link to="/digitalart"> DIGITAL ART</router-link>
-        <router-link to="/traditionalart">TRADITIONAL ART</router-link>
-      </div>
+        <h2>GALLERY</h2>
+        <div class="dropdown-content">
+          <router-link to="/digitalart">DIGITAL ART</router-link>
+          <router-link to="/traditionalart">TRADITIONAL ART</router-link>
+        </div>
       </li>
-    
+
       <li>
         <router-link to="/contact"><h2>MESSAGE ME</h2></router-link>
       </li>
@@ -65,7 +65,8 @@ a {
 
 a:hover,
 a:active,
-a.active {
+a.active,
+h2:hover {
   text-decoration: underline;
 }
 
@@ -89,18 +90,16 @@ img {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content a,
+h2 {
   color: whitesmoke;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }

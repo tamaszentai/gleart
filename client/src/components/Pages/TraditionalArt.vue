@@ -1,5 +1,5 @@
 <template>
-  <content>
+  <section>
     <gallery-grid>
       <div class="galleryCard" v-for="(image, index) in getImages" :key="image.id">
         <img :src="image.url" @click="openImage(image.url, index)"/>{{ image.title }}
@@ -10,7 +10,7 @@
       <img :src="openedImageUrl" class="openedImage">
     </div>
     </transition>
-  </content>
+  </section>
 </template>
 
 <script>
