@@ -17,5 +17,6 @@ footer {
   bottom: 0;
   width: 100%;
   color: whitesmoke;
+  margin: 0;
 }
 </style>

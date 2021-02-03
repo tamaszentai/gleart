@@ -1,8 +1,10 @@
 <template>
   <content>
-    <ul>
-      <li v-for="image in getImages" :key="image.id">{{ image.title }} <img :src=image.url class="galleryCard"></li>
-    </ul>
+    <gallery-grid>
+      <div class="galleryCard" v-for="image in getImages" :key="image.id">
+        <img :src="image.url" />{{ image.title }}
+      </div>
+    </gallery-grid>
   </content>
 </template>
 
@@ -17,11 +19,20 @@ export default {
 </script>
 
 <style scoped>
-.galleryCard {
-  width: 10%;
-}
-
 content {
   color: whitesmoke;
+}
+
+.galleryCard {
+  width: 250px;
+  height: 250px;
+  text-align: center;
+}
+
+.galleryCard img {
+  height: 200px;
+  width: auto;
+  display: block;
+  margin: auto;
 }
 </style>

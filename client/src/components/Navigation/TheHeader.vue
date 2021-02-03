@@ -37,6 +37,7 @@ export default {
 header {
   background: transparent;
   height: 7rem;
+  margin-bottom: 6rem;
 }
 
 ul {
