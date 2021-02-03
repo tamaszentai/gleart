@@ -2,7 +2,7 @@
   <section>
     <div class="container">
       <div class="hero_image_container">
-        <img :src="getHeroImage" class="hero_image" />
+        <img :src="getHeroImage" />
       </div>
       <div class="hero_info_container">
         <p class="hero_info_text">{{ getBio }}</p>
@@ -43,8 +43,9 @@ section {
   vertical-align: middle;
 }
 
-.hero_image {
+.hero_image_container img {
   vertical-align: top;
+  width: 40%;
 }
 
 .hero_info_container {

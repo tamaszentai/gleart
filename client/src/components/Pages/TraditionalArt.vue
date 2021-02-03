@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped>
-content {
+section {
   color: whitesmoke;
 }
 

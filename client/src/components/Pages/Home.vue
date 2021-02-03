@@ -16,10 +16,12 @@ h2 {
 
 section {
   color: white;
+  justify-content: center;
+  align-content: center;
 }
 #homelogo {
   display: block;
-  width: 30%;
+  width: 25%;
   margin-top: -2%;
   margin-left: auto;
   margin-right: auto;

@@ -9,7 +9,7 @@
       </li>
       <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
       <li class="dropdown">
-        <h2>GALLERY</h2>
+        <h2 class="gallery">GALLERY</h2>
         <div class="dropdown-content">
           <router-link to="/digitalart">DIGITAL ART</router-link>
           <router-link to="/traditionalart">TRADITIONAL ART</router-link>
@@ -57,12 +57,16 @@ li {
 a {
   text-decoration: none;
   cursor: pointer;
-  padding: 1rem 6rem;
   display: inline-block;
   color: whitesmoke;
   width: auto;
 }
 
+.gallery {
+  color: whitesmoke;
+  text-decoration: none;
+  display: block;
+}
 a:hover,
 a:active,
 a.active,
@@ -92,8 +96,7 @@ img {
   z-index: 1;
 }
 
-.dropdown-content a,
-h2 {
+.dropdown-content a {
   color: whitesmoke;
   padding: 12px 16px;
   text-decoration: none;
