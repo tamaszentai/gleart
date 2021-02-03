@@ -6,7 +6,7 @@
         <component :is="slotProps.Component"></component>
       </transition>
     </router-view>
-    <the-footer></the-footer>>
+    <the-footer></the-footer>
   </main>
 </template>
 
@@ -32,12 +32,9 @@ export default {
 html {
   font-family: "Texturina", serif;
   background-image: url("./assets/GLEART_background1.jpg");
-  height: 100vh;
-  width: 100vw;
   position: relative;
   background-size: cover;
   background-attachment: fixed;
-  /* background-repeat: no-repeat; */
 }
 
 .fade-component-enter-from,
