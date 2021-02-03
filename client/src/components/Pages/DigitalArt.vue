@@ -5,9 +5,11 @@
         <img :src="image.url" @click="openImage(image.url, index)"/>{{ image.title }}
       </div>
     </gallery-grid>
+    <transition name="fade-gallery" mode="out-in">
     <div v-if="isLightboxActive" class="lightbox" @click="closeImage">
       <img :src="openedImageUrl" class="openedImage">
     </div>
+    </transition>
   </content>
 </template>
 
@@ -77,5 +79,23 @@ content {
 
 .openedImage {
   height: 75vh;
+}
+
+.fade-gallery-enter-from,
+.fade-gallery-leave-to {
+  opacity: 0;
+}
+
+.fade-gallery-enter-active {
+  transition: opacity 0.2s ease-out;
+}
+
+.fade-gallery-leave-active {
+  transition: opacity 0.2s ease-in;
+}
+
+.fade-gallery-enter-to,
+.fade-gallery-leave-from {
+  opacity: 1;
 }
 </style>
