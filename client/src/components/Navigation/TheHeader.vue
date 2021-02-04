@@ -9,10 +9,14 @@
       </li>
       <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
       <li class="dropdown">
-        <h2 class="gallery">GALLERY</h2>
+        <h2 class="gallery" :class="isGalleryActiveComputed">GALLERY</h2>
         <div class="dropdown-content">
-          <router-link to="/digitalart">DIGITAL ART</router-link>
-          <router-link to="/traditionalart">TRADITIONAL ART</router-link>
+          <router-link to="/digitalart" 
+            >DIGITAL ART</router-link
+          >
+          <router-link to="/traditionalart"
+            >TRADITIONAL ART</router-link
+          >
         </div>
       </li>
 
@@ -28,6 +32,9 @@ export default {
   computed: {
     isHide() {
       return this.$route.path !== "/login";
+    },
+    isGalleryActiveComputed() {
+      return this.$route.path === "/traditionalart" || this.$route.path === "/digitalart" ? "active" : "";
     },
   },
 };
@@ -67,11 +74,18 @@ a {
   text-decoration: none;
   display: block;
 }
+
+.gallery:hover,
+.gallery.active {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 a:hover,
 a:active,
-a.active,
-h2:hover {
+a.active {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 img {

@@ -24,10 +24,6 @@ export default {
 };
 </script>
 <style scoped>
-h2 {
-  text-align: center;
-}
-
 section {
   color: whitesmoke;
   margin: 0% 5%;
