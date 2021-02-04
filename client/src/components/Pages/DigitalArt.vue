@@ -1,16 +1,24 @@
 <template>
   <section>
     <gallery-grid>
-      <div class="galleryCard" v-for="(image, index) in getImages" :key="image.id">
-        <img :src="image.url" @click="openImage(image.url, index)"/>{{ image.title }}
+      <div
+        class="galleryCard"
+        v-for="(image, index) in getImages"
+        :key="image.id"
+      >
+        <img :src="image.url" @click="openImage(image.url, index)" />{{
+          image.title
+        }}
       </div>
     </gallery-grid>
     <transition name="fade-gallery" mode="out-in">
-    <div v-if="isLightboxActive" class="lightbox" @click="closeImage">
-      <div @click="prevImage" class="previous">back</div>
-      <img :src="openedImageUrl" class="openedImage">
-      <div @click="nextImage" class="next">forward</div>
-    </div>
+      <div v-if="isLightboxActive" class="lightbox">
+        <div @click="prevImage" class="previous">back</div>
+        <transition name="fade-gallery" mode="out-in">
+        <img :src="showImage || showNextImage" class="openedImage" @click="closeImage" />
+        </transition>
+        <div @click="nextImage" class="next">forward</div>
+      </div>
     </transition>
   </section>
 </template>
@@ -19,20 +27,35 @@
 export default {
   data() {
     return {
-      activeClass: 'lightbox.active',
+      activeClass: "lightbox.active",
       isLightboxActive: false,
-      tempImageUrl: '',
-    }
+      tempImageUrl: "",
+      tempIndex: null,
+    };
   },
   methods: {
     openImage(url, index) {
       this.isLightboxActive = true;
       this.tempImageUrl = url;
-      console.log(index);
+      this.tempIndex = index;
     },
     closeImage() {
       this.isLightboxActive = false;
-    }
+    },
+    prevImage() {
+      if (this.tempIndex > 0) {
+        this.tempIndex -= 1;
+      }
+    },
+    nextImage() {
+      if (
+        this.$store.getters["digitalArt/getImages"].length - 1 >
+        this.tempIndex
+      ) {
+        this.tempIndex += 1;
+      }
+      console.log(this.tempIndex);
+    },
   },
   computed: {
     getImages() {
@@ -40,6 +63,9 @@ export default {
     },
     openedImageUrl() {
       return this.tempImageUrl;
+    },
+    showImage() {
+      return this.$store.getters["digitalArt/getImages"][this.tempIndex].url;
     },
   },
 };
@@ -54,7 +80,6 @@ section {
   width: 250px;
   height: 250px;
   text-align: center;
-  
 }
 
 .galleryCard img {
@@ -101,6 +126,11 @@ section {
 .fade-gallery-leave-from {
   opacity: 1;
 }
+
+.previous {
+  z-index: 1100;
+}
+
 .previous:hover {
   color: orange;
 }
