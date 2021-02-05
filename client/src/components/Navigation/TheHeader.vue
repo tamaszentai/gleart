@@ -8,8 +8,16 @@
         <router-link to="/about"><h2>ABOUT ME</h2></router-link>
       </li>
       <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
-      <li>
-        <h2 class="gallery" :class="isGalleryActiveComputed" @click="toggleHeader">GALLERY</h2>
+      <li class="dropdown">
+        <h2 class="gallery" :class="isGalleryActiveComputed">GALLERY</h2>
+        <div class="dropdown-content">
+          <router-link to="/digitalart" 
+            >DIGITAL ART</router-link
+          >
+          <router-link to="/traditionalart"
+            >TRADITIONAL ART</router-link
+          >
+        </div>
       </li>
 
       <li>
@@ -21,12 +29,6 @@
 
 <script>
 export default {
-  emits: ['toogle-header'],
-  methods: {
-    toggleHeader() {
-      this.$emit('toggle-header');
-    }
-  },
   computed: {
     isHide() {
       return this.$route.path !== "/login";
@@ -44,7 +46,6 @@ header {
   height: 7rem;
   margin-bottom: 6rem;
 }
-
 ul {
   list-style: none;
   margin: 0;
@@ -54,11 +55,9 @@ ul {
   justify-content: center;
   align-items: center;
 }
-
 li {
   margin: 0 2rem;
 }
-
 a {
   text-decoration: none;
   cursor: pointer;
@@ -66,59 +65,49 @@ a {
   color: whitesmoke;
   width: auto;
 }
-
 .gallery {
   color: whitesmoke;
   text-decoration: none;
   display: block;
 }
-
 .gallery:hover,
 .gallery.active {
   text-decoration: underline;
   cursor: pointer;
 }
-
 a:hover,
 a:active,
 a.active {
   text-decoration: underline;
   cursor: pointer;
 }
-
 img {
   display: inline-block;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 0;
   background-color: rgba(255, 255, 255, 0.2);
-  min-width: 200px;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: whitesmoke;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-
 .dropdown-content a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }

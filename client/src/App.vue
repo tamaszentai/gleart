@@ -1,7 +1,6 @@
 <template>
   <main>
-    <gallery-navigation v-if="isGalleryClicked"></gallery-navigation>
-    <the-header v-if="!isGalleryClicked" @toggle-header="toggleHeader"></the-header>
+    <the-header></the-header>
     <router-view v-slot="slotProps">
       <transition name="fade-component" mode="out-in">
         <component :is="slotProps.Component"></component>
@@ -14,17 +13,10 @@
 <script>
 import TheHeader from "./components/Navigation/TheHeader";
 import TheFooter from "./components/Footer/TheFooter";
-import GalleryNavigation from "./components/Navigation/GalleryNavigation";
 export default {
   components: {
     TheHeader,
     TheFooter,
-    GalleryNavigation
-  },
-  data() {
-    return{
-      isGalleryClicked: false
-    }
   },
   methods: {
     toggleHeader() {
