@@ -12,11 +12,9 @@
       </div>
     </gallery-grid>
     <transition name="fade-gallery" mode="out-in">
-      <div v-if="isLightboxActive" class="lightbox">
-        <div @click="prevImage" class="previous">back</div>
-        <transition name="fade-gallery" mode="out-in">
-        <img :src="showImage || showNextImage" class="openedImage" @click="closeImage" />
-        </transition>
+      <div v-if="isLightboxActive" class="lightbox" >
+         <div @click="prevImage" class="previous">back</div>
+        <img :src="showImage || showNextImage" class="openedImage"  @click="closeImage"/>
         <div @click="nextImage" class="next">forward</div>
       </div>
     </transition>
@@ -54,7 +52,6 @@ export default {
       ) {
         this.tempIndex += 1;
       }
-      console.log(this.tempIndex);
     },
   },
   computed: {
@@ -80,6 +77,7 @@ section {
   width: 250px;
   height: 250px;
   text-align: center;
+  overflow: hidden;
 }
 
 .galleryCard img {
@@ -127,15 +125,13 @@ section {
   opacity: 1;
 }
 
-.previous {
+.previous,
+.next {
   z-index: 1100;
 }
 
-.previous:hover {
-  color: orange;
-}
-
-.next:hover {
+.previous:hover,
+.next:hover  {
   color: orange;
 }
 </style>

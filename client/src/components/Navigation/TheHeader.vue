@@ -8,16 +8,8 @@
         <router-link to="/about"><h2>ABOUT ME</h2></router-link>
       </li>
       <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
-      <li class="dropdown">
-        <h2 class="gallery" :class="isGalleryActiveComputed">GALLERY</h2>
-        <div class="dropdown-content">
-          <router-link to="/digitalart" 
-            >DIGITAL ART</router-link
-          >
-          <router-link to="/traditionalart"
-            >TRADITIONAL ART</router-link
-          >
-        </div>
+      <li>
+        <h2 class="gallery" :class="isGalleryActiveComputed" @click="toggleHeader">GALLERY</h2>
       </li>
 
       <li>
@@ -29,6 +21,12 @@
 
 <script>
 export default {
+  emits: ['toogle-header'],
+  methods: {
+    toggleHeader() {
+      this.$emit('toggle-header');
+    }
+  },
   computed: {
     isHide() {
       return this.$route.path !== "/login";
@@ -103,9 +101,9 @@ img {
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 35%;
+  left: 0;
   background-color: rgba(255, 255, 255, 0.2);
-  min-width: 160px;
+  min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }

@@ -26,7 +26,6 @@ export default {
 <style scoped>
 section {
   color: whitesmoke;
-  margin: 0% 5%;
 }
 
 .container {
