@@ -9,6 +9,7 @@ import Login from "./components/Pages/Admin/Login.vue";
 import EditAbout from "./components/Pages/Admin/EditAbout.vue";
 import EditDigitalArt from "./components/Pages/Admin/EditDigitalArt.vue"
 import EditTraditionalArt from "./components/Pages/Admin/EditTraditionalArt.vue";
+import NotFound from "./components/Pages/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,9 +21,10 @@ const router = createRouter({
     { path: "/traditionalart", component: TraditionalArt },
     { path: "/contact", component: Contact },
     { path: "/login", component: Login },
-    { path: "/editabout", component: EditAbout},
-    { path: "/editdigitalart", component: EditDigitalArt},
-    { path: "/edittraditionalart", component: EditTraditionalArt}
+    { path: "/editabout", component: EditAbout },
+    { path: "/editdigitalart", component: EditDigitalArt },
+    { path: "/edittraditionalart", component: EditTraditionalArt },
+    { path: "/:notFound(.*)", component: NotFound }
   ],
   linkActiveClass: "active",
 });
