@@ -48,7 +48,7 @@ html {
 }
 
 main, section {
-  min-height: calc(100vh - 7rem - 3rem);
+  min-height: calc(100vh - 7rem - 3.4rem);
 }
 
 .fade-component-enter-from,
