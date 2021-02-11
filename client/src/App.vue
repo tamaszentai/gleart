@@ -47,6 +47,10 @@ html {
   background-attachment: fixed;
 }
 
+main, section {
+  min-height: calc(100vh - 7rem - 3rem);
+}
+
 .fade-component-enter-from,
 .fade-component-leave-to {
   opacity: 0;
