@@ -1,6 +1,6 @@
 <template>
   <content>
-    <form @submit.prevent="upload">
+    <form @submit.prevent="addNewImage">
       <label>Id</label>
       <input type="text" v-model="id" />
       <label>Title</label>
@@ -26,6 +26,7 @@ export default {
       id: "",
       title: "",
       selectedFile: null,
+      url: "",
     };
   },
   computed: {
@@ -35,16 +36,41 @@ export default {
   },
   methods: {
     addNewImage() {
-      if (this.id !== "" && this.title !== "" && this.url !== "") {
+      if (this.id !== "" && this.title !== "" && this.selectedFile !== null) {
+        const storageRef = firebase
+          .storage()
+          .ref(`digitalart/${this.selectedFile.name}`)
+          .put(this.selectedFile);
+        storageRef.on(
+          `state_changed`,
+          (snapshot) => {
+            this.uploadValue =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (error) => {
+            console.log(error.message);
+          },
+          () => {
+            this.uploadValue = 100;
+            storageRef.snapshot.ref.getDownloadURL().then((url) => {
+              this.url = url;
+              console.log(url);
+            });
+          }
+        );
+
         const image = {
           id: this.id,
           title: this.title,
-          selectee: this.url,
+          url: this.url,
         };
+
         this.$store.dispatch("digitalArt/addNewImage", image);
       } else {
         alert("One of the fields are empty!!!");
       }
+
+      console.log(this.$store.state);
     },
     deleteImage(id) {
       this.$store.dispatch("digitalArt/deleteImage", id);
@@ -52,28 +78,28 @@ export default {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
-    upload() {
-      const storageRef = firebase
-        .storage()
-        .ref(`${this.selectedFile.name}`)
-        .put(this.selectedFile);
-      storageRef.on(
-        `state_changed`,
-        (snapshot) => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
-          storageRef.snapshot.ref.getDownloadURL().then((url) => {
-            console.log(url);
-          });
-        }
-      );
-    },
+    // upload() {
+    //   const storageRef = firebase
+    //     .storage()
+    //     .ref(`digitalart/${this.selectedFile.name}`)
+    //     .put(this.selectedFile);
+    //   storageRef.on(
+    //     `state_changed`,
+    //     (snapshot) => {
+    //       this.uploadValue =
+    //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     },
+    //     (error) => {
+    //       console.log(error.message);
+    //     },
+    //     () => {
+    //       this.uploadValue = 100;
+    //       storageRef.snapshot.ref.getDownloadURL().then((url) => {
+    //         console.log(url);
+    //       });
+    //     }
+    //   );
+    // },
   },
 };
 </script>
