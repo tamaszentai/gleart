@@ -5,6 +5,8 @@ Lea.jpg
 GLEART_background1.jpg
 GLEART_logo.png
 
+firebaseinit.js
+
 
 # local env files
 .env.local
