@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import firebase from 'firebase';
+import 'firebase/database';
 
 export default {
   namespaced: true,
@@ -73,10 +74,6 @@ export default {
   },
   actions: {
     addNewImage(context, payload) {
-      console.log(payload);
-      context.commit('addNewImage', payload);
-
-      
         const storageRef = firebase
           .storage()
           .ref(`digitalart/${payload.file.name}`)
@@ -93,19 +90,19 @@ export default {
           () => {
             this.uploadValue = 100;
             storageRef.snapshot.ref.getDownloadURL().then((url) => {
-              this.url = url;
-              console.log(url);
+              const image = {
+                id: uuidv4(),
+                title: payload.title,
+                url: url
+              };
+              context.commit('addNewImage', image);
+              firebase.database().ref('digitalart/' + image.id).set(image)
+              console.log(image);
             });
           }
         );
-
-        // const image = {
-        //   id: this.id,
-        //   title: this.title,
-        //   url: this.url,
-        // };
     },
-    deleteImage(context, payload) {
+    async deleteImage(context, payload) {
       console.log(payload);
       context.commit('deleteImage', payload);
     }
