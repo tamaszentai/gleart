@@ -1,11 +1,8 @@
 <template>
   <content>
     <form @submit.prevent="addNewImage">
-      <label>Id</label>
-      <input type="text" v-model="id" />
-      <label>Title</label>
-      <input type="text" v-model="title" />
-      <label>Url</label>
+      <label for="title">Title</label>
+      <input type="text" id="title" v-model="title" />
       <input type="file" @change="onFileSelected" />
       <button type="submit">Add new image</button>
     </form>
@@ -19,14 +16,12 @@
 </template>
 
 <script>
-import firebase from "firebase";
 export default {
   data() {
     return {
       id: "",
       title: "",
       selectedFile: null,
-      url: "",
     };
   },
   computed: {
@@ -36,33 +31,10 @@ export default {
   },
   methods: {
     addNewImage() {
-      if (this.id !== "" && this.title !== "" && this.selectedFile !== null) {
-        const storageRef = firebase
-          .storage()
-          .ref(`digitalart/${this.selectedFile.name}`)
-          .put(this.selectedFile);
-        storageRef.on(
-          `state_changed`,
-          (snapshot) => {
-            this.uploadValue =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          },
-          (error) => {
-            console.log(error.message);
-          },
-          () => {
-            this.uploadValue = 100;
-            storageRef.snapshot.ref.getDownloadURL().then((url) => {
-              this.url = url;
-              console.log(url);
-            });
-          }
-        );
-
+      if (this.title !== "" && this.selectedFile !== null) {
         const image = {
-          id: this.id,
           title: this.title,
-          url: this.url,
+          file: this.selectedFile,
         };
 
         this.$store.dispatch("digitalArt/addNewImage", image);
