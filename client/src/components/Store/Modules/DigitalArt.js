@@ -102,9 +102,17 @@ export default {
           }
         );
     },
-    async deleteImage(context, payload) {
+    deleteImage(context, payload) {
       console.log(payload.id);
       firebase.database().ref('digitalart/' + payload.id).remove();
+      
+        const spaceRef = firebase
+          .storage()
+          .ref()
+          .child(filePath);
+        spaceRef.delete();
+      
+      
       context.commit('deleteImage', payload.id);
     }
   },
