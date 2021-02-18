@@ -50,28 +50,6 @@ export default {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
-    // upload() {
-    //   const storageRef = firebase
-    //     .storage()
-    //     .ref(`digitalart/${this.selectedFile.name}`)
-    //     .put(this.selectedFile);
-    //   storageRef.on(
-    //     `state_changed`,
-    //     (snapshot) => {
-    //       this.uploadValue =
-    //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     },
-    //     (error) => {
-    //       console.log(error.message);
-    //     },
-    //     () => {
-    //       this.uploadValue = 100;
-    //       storageRef.snapshot.ref.getDownloadURL().then((url) => {
-    //         console.log(url);
-    //       });
-    //     }
-    //   );
-    // },
   },
 };
 </script>

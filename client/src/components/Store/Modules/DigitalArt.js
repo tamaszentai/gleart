@@ -104,6 +104,7 @@ export default {
     },
     async deleteImage(context, payload) {
       console.log(payload);
+      firebase.database().ref('digitalart/' + payload).remove();
       context.commit('deleteImage', payload);
     }
   },
