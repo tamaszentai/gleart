@@ -12,6 +12,7 @@ export default {
           title: "Markolab",
           url:
             "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/139580808_3866209146773388_8468341967264893543_o.jpg?_nc_cat=104&ccb=2&_nc_sid=0debeb&_nc_ohc=3G7SU9B5bmwAX8ZPDkd&_nc_ht=scontent.flhr4-1.fna&oh=87a720e2ee7a91f92b9561ed447a31c0&oe=603F22A7",
+            fileName: 'Markolab.png'
         },
         {
           id: uuidv4(),
@@ -64,7 +65,7 @@ export default {
         id: payload.id,
         title: payload.title,
         url: payload.url,
-        filename: payload.fileName
+        fileName: payload.fileName
       };
       state.dummyImages.push(newImage);
     },
@@ -104,13 +105,13 @@ export default {
               .database()
               .ref("digitalart/" + image.id)
               .set(image);
-            console.log(image);
+            console.log(payload);
           });
         }
       );
     },
     deleteImage(context, payload) {
-      console.log(payload.fileName);
+      console.log(payload.id);
       firebase
         .database()
         .ref("digitalart/" + payload.id)
@@ -136,6 +137,7 @@ export default {
         });
 
       context.commit("deleteImage", payload.id);
+      console.log(payload);
     },
   },
   getters: {

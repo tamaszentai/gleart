@@ -8,7 +8,7 @@
     </form>
     <gallery-grid>
       <div class="galleryCard" v-for="image in getImages" :key="image.id">
-        <img :src="image.url" />{{ image.title }}
+        <img :src="image.url" />{{ image.title }}{{image.fileName}}
         <button class="delete" @click="deleteImage(image.id, image.url, image.fileName)">
           X
         </button>
@@ -45,11 +45,10 @@ export default {
       } else {
         alert("One of the fields are empty!!!");
       }
-
-      console.log(this.$store.state);
     },
     deleteImage(id, url, fileName) {
       const data = { id, url, fileName };
+      console.log(fileName);
       this.$store.dispatch("digitalArt/deleteImage", data);
     },
     onFileSelected(event) {
