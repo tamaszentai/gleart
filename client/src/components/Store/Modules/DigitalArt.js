@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-import firebase from 'firebase';
-import 'firebase/database';
+import { v4 as uuidv4 } from "uuid";
+import firebase from "firebase";
+import "firebase/database";
 
 export default {
   namespaced: true,
@@ -29,92 +29,114 @@ export default {
           id: uuidv4(),
           title: "Portrait",
           url:
-          "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/135554339_3838166389577664_2553318880984613522_o.jpg?_nc_cat=107&ccb=2&_nc_sid=0debeb&_nc_ohc=zV0AHvqwkrsAX_X9KlO&_nc_ht=scontent.flhr4-1.fna&oh=1f4603b8ef2c4e6c001dd54319210fd3&oe=6041BD5D"
+            "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/135554339_3838166389577664_2553318880984613522_o.jpg?_nc_cat=107&ccb=2&_nc_sid=0debeb&_nc_ohc=zV0AHvqwkrsAX_X9KlO&_nc_ht=scontent.flhr4-1.fna&oh=1f4603b8ef2c4e6c001dd54319210fd3&oe=6041BD5D",
         },
         {
           id: uuidv4(),
           title: "Portrait",
-          url: 
-          "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/119517500_3529860490408257_1465187508653241671_o.jpg?_nc_cat=105&ccb=2&_nc_sid=0debeb&_nc_ohc=HsoSecrweqQAX-UXfIo&_nc_ht=scontent.flhr4-1.fna&oh=0ddf1c0089430e4f56f50009ef9c802a&oe=6042BC0E"
+          url:
+            "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/119517500_3529860490408257_1465187508653241671_o.jpg?_nc_cat=105&ccb=2&_nc_sid=0debeb&_nc_ohc=HsoSecrweqQAX-UXfIo&_nc_ht=scontent.flhr4-1.fna&oh=0ddf1c0089430e4f56f50009ef9c802a&oe=6042BC0E",
         },
         {
-        id: uuidv4(),
-        title: "Orokmozgo",
-        url: 
-        "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/116426008_3385690214825286_2194419260926392238_o.jpg?_nc_cat=107&ccb=2&_nc_sid=8bfeb9&_nc_ohc=LXGZANIfu-QAX_f4p7_&_nc_ht=scontent.flhr4-1.fna&oh=f308d8883ed3386f6931c3015d21dfcb&oe=60411156"
+          id: uuidv4(),
+          title: "Orokmozgo",
+          url:
+            "https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/116426008_3385690214825286_2194419260926392238_o.jpg?_nc_cat=107&ccb=2&_nc_sid=8bfeb9&_nc_ohc=LXGZANIfu-QAX_f4p7_&_nc_ht=scontent.flhr4-1.fna&oh=f308d8883ed3386f6931c3015d21dfcb&oe=60411156",
         },
         {
           id: uuidv4(),
           title: "Crows",
-          url: 
-          "https://scontent.flhr4-2.fna.fbcdn.net/v/t1.0-9/110325197_3365817730145868_8264252821245288892_o.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=N3jHZL8xPrkAX9Qyl8t&_nc_ht=scontent.flhr4-2.fna&oh=d4cb76db3f473a095fbfa2d803f8d930&oe=60432C02"
+          url:
+            "https://scontent.flhr4-2.fna.fbcdn.net/v/t1.0-9/110325197_3365817730145868_8264252821245288892_o.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=N3jHZL8xPrkAX9Qyl8t&_nc_ht=scontent.flhr4-2.fna&oh=d4cb76db3f473a095fbfa2d803f8d930&oe=60432C02",
         },
         {
           id: uuidv4(),
           title: "Tattoo design",
-          url: 
-          "https://scontent.flhr4-2.fna.fbcdn.net/v/t1.0-9/110221411_3365718140155827_3839059845908349322_o.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=3BcUIVo9xjMAX_xzBz9&_nc_ht=scontent.flhr4-2.fna&oh=3fd54edb9bf4014aa2620333aebd9bd0&oe=6041919E"
-        }
+          url:
+            "https://scontent.flhr4-2.fna.fbcdn.net/v/t1.0-9/110221411_3365718140155827_3839059845908349322_o.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=3BcUIVo9xjMAX_xzBz9&_nc_ht=scontent.flhr4-2.fna&oh=3fd54edb9bf4014aa2620333aebd9bd0&oe=6041919E",
+        },
       ],
     };
   },
   mutations: {
-    addNewImage(state,payload) {
+    addNewImage(state, payload) {
       const newImage = {
         id: payload.id,
         title: payload.title,
-        url: payload.url
-      }
+        url: payload.url,
+        filename: payload.fileName
+      };
       state.dummyImages.push(newImage);
     },
     deleteImage(state, payload) {
-     const newState = state.dummyImages.filter(image => image.id !== payload);
-     state.dummyImages = newState;
-    }
+      const newState = state.dummyImages.filter(
+        (image) => image.id !== payload
+      );
+      state.dummyImages = newState;
+    },
   },
   actions: {
     addNewImage(context, payload) {
-        const storageRef = firebase
-          .storage()
-          .ref(`digitalart/${payload.file.name}`)
-          .put(payload.file);
-        storageRef.on(
-          `state_changed`,
-          (snapshot) => {
-            this.uploadValue =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          },
-          (error) => {
-            console.log(error.message);
-          },
-          () => {
-            this.uploadValue = 100;
-            storageRef.snapshot.ref.getDownloadURL().then((url) => {
-              const image = {
-                id: uuidv4(),
-                title: payload.title,
-                url: url
-              };
-              context.commit('addNewImage', image);
-              firebase.database().ref('digitalart/' + image.id).set(image)
-              console.log(image);
-            });
-          }
-        );
+      const storageRef = firebase
+        .storage()
+        .ref(`digitalart/${payload.file.name}`)
+        .put(payload.file);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            const image = {
+              id: uuidv4(),
+              title: payload.title,
+              url: url,
+              fileName: payload.fileName
+            };
+            context.commit("addNewImage", image);
+            firebase
+              .database()
+              .ref("digitalart/" + image.id)
+              .set(image);
+            console.log(image);
+          });
+        }
+      );
     },
     deleteImage(context, payload) {
-      console.log(payload.id);
-      firebase.database().ref('digitalart/' + payload.id).remove();
-      
-        const spaceRef = firebase
-          .storage()
-          .ref()
-          .child(filePath);
-        spaceRef.delete();
-      
-      
-      context.commit('deleteImage', payload.id);
-    }
+      console.log(payload.fileName);
+      firebase
+        .database()
+        .ref("digitalart/" + payload.id)
+        .remove();
+
+      // Create a reference to the file to delete
+      const storageRef = firebase
+      .storage()
+      .ref(`digitalart/${payload.fileName}`);
+
+      // const desertRef = storageRef.child(`digitalart/${payload.url}`);
+
+      // Delete the file
+      storageRef
+        .delete()
+        .then(() => {
+          // File deleted successfully
+          console.log('File deleted successfully')
+        })
+        .catch((error) => {
+          // Uh-oh, an error occurred!
+          console.log(error);
+        });
+
+      context.commit("deleteImage", payload.id);
+    },
   },
   getters: {
     getImages(state) {

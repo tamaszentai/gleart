@@ -9,7 +9,7 @@
     <gallery-grid>
       <div class="galleryCard" v-for="image in getImages" :key="image.id">
         <img :src="image.url" />{{ image.title }}
-        <button class="delete" @click="deleteImage(image.id, image.url)">
+        <button class="delete" @click="deleteImage(image.id, image.url, image.fileName)">
           X
         </button>
       </div>
@@ -24,6 +24,7 @@ export default {
       id: "",
       title: "",
       selectedFile: null,
+      selectedFileName: ''
     };
   },
   computed: {
@@ -37,6 +38,7 @@ export default {
         const image = {
           title: this.title,
           file: this.selectedFile,
+          fileName: this.selectedFileName
         };
 
         this.$store.dispatch("digitalArt/addNewImage", image);
@@ -46,12 +48,13 @@ export default {
 
       console.log(this.$store.state);
     },
-    deleteImage(id, url) {
-      const data = { id, url };
+    deleteImage(id, url, fileName) {
+      const data = { id, url, fileName };
       this.$store.dispatch("digitalArt/deleteImage", data);
     },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
+      this.selectedFileName = event.target.files[0].name;
     },
   },
 };
