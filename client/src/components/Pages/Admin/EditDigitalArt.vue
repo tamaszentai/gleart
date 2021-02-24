@@ -6,6 +6,7 @@
       <input type="file" @change="onFileSelected" />
       <button type="submit">Add new image</button>
     </form>
+    <button @click="loadImages">Tester fetcher</button>
     <gallery-grid>
       <div class="galleryCard" v-for="image in getImages" :key="image.id">
         <img :src="image.url" />{{ image.title }}{{image.fileName}}
@@ -27,12 +28,18 @@ export default {
       selectedFileName: ''
     };
   },
+  created() {
+    this.loadImages;
+  },
   computed: {
     getImages() {
       return this.$store.getters["digitalArt/getImages"];
     },
   },
   methods: {
+    loadImages() {
+      this.$store.dispatch('digitalArt/loadImages');
+    },
     addNewImage() {
       if (this.title !== "" && this.selectedFile !== null) {
         const image = {

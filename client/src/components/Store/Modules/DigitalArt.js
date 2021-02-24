@@ -10,6 +10,9 @@ export default {
     };
   },
   mutations: {
+    loadImages(/*state, payload*/) {
+
+    },
     addNewImage(state, payload) {
       const newImage = {
         id: payload.id,
@@ -27,6 +30,26 @@ export default {
     },
   },
   actions: {
+    async loadImages() {
+     
+        firebase
+        .database()
+        .ref("digitalart/")
+        .get()
+        .then(function(snapshot) {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          }
+          else {
+            console.log("No data available");
+          }
+        });
+
+      
+  
+      // context.commit('setCoaches', coaches);
+      // context.commit('setFetchTimestamp');
+    },
     addNewImage(context, payload) {
       const id = uuidv4();
       const fileName = payload.file.name.split(".");
