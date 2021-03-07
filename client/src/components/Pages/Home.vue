@@ -6,7 +6,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  // created() {
+  //   this.loadImages;
+  // },
+  // methods: {
+  //   async loadImages() {
+  //    await this.$store.dispatch('digitalArt/loadImages');
+  //   }
+  // }
+};
 </script>
 
 <style scoped>

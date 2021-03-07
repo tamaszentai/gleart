@@ -6,12 +6,12 @@ export default {
   namespaced: true,
   state() {
     return {
-      dummyImages: [],
+      images: [],
     };
   },
   mutations: {
-    loadImages(/*state, payload*/) {
-
+    setImages(state, payload) {
+      state.images = payload;
     },
     addNewImage(state, payload) {
       const newImage = {
@@ -20,35 +20,47 @@ export default {
         url: payload.url,
         fileName: payload.fileName,
       };
-      state.dummyImages.push(newImage);
+      state.images.push(newImage);
     },
     deleteImage(state, payload) {
-      const newState = state.dummyImages.filter(
+      const newState = state.images.filter(
         (image) => image.id !== payload
       );
-      state.dummyImages = newState;
+      state.images = newState;
     },
   },
   actions: {
-    async loadImages() {
-     
+    async loadImages(context) {
+      let responseData = null;
+     await
         firebase
         .database()
         .ref("digitalart/")
         .get()
         .then(function(snapshot) {
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            responseData = snapshot.val();
+            
           }
           else {
             console.log("No data available");
           }
         });
 
-      
-  
-      // context.commit('setCoaches', coaches);
-      // context.commit('setFetchTimestamp');
+        console.log(responseData);
+
+        const images = [];
+
+      for (const key in responseData) {
+      const image = {
+        id: key,
+        fileName: responseData[key].fileName,
+        title: responseData[key].title,
+        url: responseData[key].url,
+      };
+      images.push(image);
+      }
+      context.commit('setImages', images);
     },
     addNewImage(context, payload) {
       const id = uuidv4();
@@ -119,7 +131,7 @@ export default {
   },
   getters: {
     getImages(state) {
-      return state.dummyImages;
+      return state.images;
     },
   },
 };

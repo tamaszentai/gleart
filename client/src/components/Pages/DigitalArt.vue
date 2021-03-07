@@ -31,7 +31,13 @@ export default {
       tempIndex: null,
     };
   },
+  created() {
+    this.loadImages();
+  },
   methods: {
+    async loadImages() {
+     await this.$store.dispatch('digitalArt/loadImages');
+    },
     openImage(url, index) {
       this.isLightboxActive = true;
       this.tempImageUrl = url;
