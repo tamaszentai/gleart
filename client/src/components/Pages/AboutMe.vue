@@ -13,6 +13,9 @@
 
 <script>
 export default {
+  created() {
+    this.loadAbout();
+  },
   computed: {
     getBio() {
       return this.$store.getters["about/getAbout"];
@@ -21,8 +24,14 @@ export default {
       return this.$store.getters["about/getHeroImage"];
     },
   },
+  methods: {
+    async loadAbout() {
+      await this.$store.dispatch("about/loadAbout");
+    },
+  },
 };
 </script>
+
 <style scoped>
 section {
   color: whitesmoke;

@@ -12,10 +12,11 @@
       </div>
     </gallery-grid>
     <transition name="fade-gallery" mode="out-in">
-      <div v-if="isLightboxActive" class="lightbox" >
-         <div @click="prevImage" class="previous">back</div>
+      <div v-if="isLightboxActive" class="lightbox" @click="closeImage">
+         <!-- <button @click="prevImage" class="previous">back</button> -->
         <img :src="showImage || showNextImage" class="openedImage"  @click="closeImage"/>
-        <div @click="nextImage" class="next">forward</div>
+        <p></p>
+        <!-- <button @click="nextImage" class="next">forward</button> -->
       </div>
     </transition>
   </section>
@@ -46,19 +47,19 @@ export default {
     closeImage() {
       this.isLightboxActive = false;
     },
-    prevImage() {
-      if (this.tempIndex > 0) {
-        this.tempIndex -= 1;
-      }
-    },
-    nextImage() {
-      if (
-        this.$store.getters["digitalArt/getImages"].length - 1 >
-        this.tempIndex
-      ) {
-        this.tempIndex += 1;
-      }
-    },
+    // prevImage() {
+    //   if (this.tempIndex > 0) {
+    //     this.tempIndex -= 1;
+    //   }
+    // },
+    // nextImage() {
+    //   if (
+    //     this.$store.getters["digitalArt/getImages"].length - 1 >
+    //     this.tempIndex
+    //   ) {
+    //     this.tempIndex += 1;
+    //   }
+    // },
   },
   computed: {
     getImages() {
@@ -92,6 +93,7 @@ section {
   display: block;
   margin: auto;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .lightbox {
@@ -110,7 +112,7 @@ section {
 }
 
 .openedImage {
-  height: 75vh;
+  height: 95vh;
 }
 
 .fade-gallery-enter-from,

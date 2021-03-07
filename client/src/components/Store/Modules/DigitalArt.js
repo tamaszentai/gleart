@@ -62,12 +62,12 @@ export default {
       }
       context.commit('setImages', images);
     },
-    addNewImage(context, payload) {
+    async addNewImage(context, payload) {
       const id = uuidv4();
       const fileName = payload.file.name.split(".");
       const modifiedFileName = id + "." + fileName[1];
 
-      const storageRef = firebase
+      const storageRef = await firebase
         .storage()
         .ref(`digitalart/${modifiedFileName}`)
         .put(payload.file);
@@ -99,15 +99,15 @@ export default {
         }
       );
     },
-    deleteImage(context, payload) {
+    async deleteImage(context, payload) {
       console.log(payload.id);
-      firebase
+      await firebase
         .database()
         .ref("digitalart/" + payload.id)
         .remove();
 
       // Create a reference to the file to delete
-      const storageRef = firebase
+      const storageRef = await firebase
         .storage()
         .ref(`digitalart/${payload.fileName}`);
 
