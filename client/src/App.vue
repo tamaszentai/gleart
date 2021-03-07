@@ -6,17 +6,17 @@
         <component :is="slotProps.Component"></component>
       </transition>
     </router-view>
-    <the-footer></the-footer>
+    <!-- <the-footer></the-footer> -->
   </main>
 </template>
 
 <script>
 import TheHeader from "./components/Navigation/TheHeader";
-import TheFooter from "./components/Footer/TheFooter";
+// import TheFooter from "./components/Footer/TheFooter";
 export default {
   components: {
     TheHeader,
-    TheFooter,
+    // TheFooter,
   },
   methods: {
     toggleHeader() {

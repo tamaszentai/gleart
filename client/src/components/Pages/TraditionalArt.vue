@@ -1,14 +1,22 @@
 <template>
   <section>
     <gallery-grid>
-      <div class="galleryCard" v-for="(image, index) in getImages" :key="image.id">
-        <img :src="image.url" @click="openImage(image.url, index)"/>{{ image.title }}
+      <div
+        class="galleryCard"
+        v-for="(image, index) in getImages"
+        :key="image.id"
+      >
+        <img :src="image.url" @click="openImage(image.url, index)" />{{
+          image.title
+        }}
       </div>
     </gallery-grid>
     <transition name="fade-gallery" mode="out-in">
-    <div v-if="isLightboxActive" class="lightbox" @click="closeImage">
-      <img :src="openedImageUrl" class="openedImage">
-    </div>
+      <div v-if="isLightboxActive" class="lightbox" >
+         <div @click="prevImage" class="previous">back</div>
+        <img :src="showImage || showNextImage" class="openedImage"  @click="closeImage"/>
+        <div @click="nextImage" class="next">forward</div>
+      </div>
     </transition>
   </section>
 </template>
@@ -17,20 +25,40 @@
 export default {
   data() {
     return {
-      activeClass: 'lightbox.active',
+      activeClass: "lightbox.active",
       isLightboxActive: false,
-      tempImageUrl: '',
-    }
+      tempImageUrl: "",
+      tempIndex: null,
+    };
+  },
+  created() {
+    this.loadImages();
   },
   methods: {
+    async loadImages() {
+     await this.$store.dispatch('traditionalArt/loadImages');
+    },
     openImage(url, index) {
       this.isLightboxActive = true;
       this.tempImageUrl = url;
-      console.log(index);
+      this.tempIndex = index;
     },
     closeImage() {
       this.isLightboxActive = false;
-    }
+    },
+    prevImage() {
+      if (this.tempIndex > 0) {
+        this.tempIndex -= 1;
+      }
+    },
+    nextImage() {
+      if (
+        this.$store.getters["traditionalArt/getImages"].length - 1 >
+        this.tempIndex
+      ) {
+        this.tempIndex += 1;
+      }
+    },
   },
   computed: {
     getImages() {
@@ -38,6 +66,9 @@ export default {
     },
     openedImageUrl() {
       return this.tempImageUrl;
+    },
+    showImage() {
+      return this.$store.getters["traditionalArt/getImages"][this.tempIndex].url;
     },
   },
 };
@@ -52,7 +83,7 @@ section {
   width: 250px;
   height: 250px;
   text-align: center;
-  
+  overflow: hidden;
 }
 
 .galleryCard img {
@@ -74,7 +105,8 @@ section {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: white;
+  color: red;
+  font-size: 5rem;
 }
 
 .openedImage {
@@ -97,5 +129,15 @@ section {
 .fade-gallery-enter-to,
 .fade-gallery-leave-from {
   opacity: 1;
+}
+
+.previous,
+.next {
+  z-index: 1100;
+}
+
+.previous:hover,
+.next:hover  {
+  color: orange;
 }
 </style>

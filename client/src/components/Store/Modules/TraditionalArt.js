@@ -1,47 +1,136 @@
+import { v4 as uuidv4 } from "uuid";
+import firebase from "firebase";
+import "firebase/database";
+
 export default {
   namespaced: true,
   state() {
     return {
-      dummyImages: [
-        {
-          id: '000000',
-          title: 'Kakas',
-          url: 'https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/138764454_3867146980012938_5006146712970972334_o.jpg?_nc_cat=101&ccb=2&_nc_sid=0debeb&_nc_ohc=cPVN6D7o_NsAX-U4vgW&_nc_ht=scontent.flhr4-1.fna&oh=22eb8a70b2b37e42588ac3640da397ba&oe=603F7543'
-        },
-        {
-          id: '000001',
-          title: 'Mitmitke',
-          url: 'https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/139523044_3874907869236849_2848927588190621884_o.jpg?_nc_cat=105&ccb=2&_nc_sid=0debeb&_nc_ohc=mMZAz6nJngUAX-3_els&_nc_oc=AQkvB2dImPFyS34NRTW1jrzoaftU1Aw40g8HL9LdCn5yuVoFYf1siGJaa7X9Yw4NCzeYQtkz4AIUG-lVxYxcR7qQ&_nc_ht=scontent.flhr4-1.fna&oh=d98e77c2ac45ee74e8166441b1c8544e&oe=603D40AA'
-        },
-      ]
-    }
+      images: [],
+    };
   },
   mutations: {
-    addNewImage(state,payload) {
+    setImages(state, payload) {
+      state.images = payload;
+    },
+    addNewImage(state, payload) {
       const newImage = {
         id: payload.id,
         title: payload.title,
-        url: payload.url
-      }
-      state.dummyImages.push(newImage);
+        url: payload.url,
+        fileName: payload.fileName,
+      };
+      state.images.push(newImage);
     },
     deleteImage(state, payload) {
-     const newState = state.dummyImages.filter(image => image.id !== payload);
-     state.dummyImages = newState;
-    }
+      const newState = state.images.filter(
+        (image) => image.id !== payload
+      );
+      state.images = newState;
+    },
   },
   actions: {
+    async loadImages(context) {
+      let responseData = null;
+     await
+        firebase
+        .database()
+        .ref("traditionalart/")
+        .get()
+        .then(function(snapshot) {
+          if (snapshot.exists()) {
+            responseData = snapshot.val();
+            
+          }
+          else {
+            console.log("No data available");
+          }
+        });
+
+        console.log(responseData);
+
+        const images = [];
+
+      for (const key in responseData) {
+      const image = {
+        id: key,
+        fileName: responseData[key].fileName,
+        title: responseData[key].title,
+        url: responseData[key].url,
+      };
+      images.push(image);
+      }
+      context.commit('setImages', images);
+    },
     addNewImage(context, payload) {
-      context.commit('addNewImage', payload);
+      const id = uuidv4();
+      const fileName = payload.file.name.split(".");
+      const modifiedFileName = id + "." + fileName[1];
+
+      const storageRef = firebase
+        .storage()
+        .ref(`traditionalart/${modifiedFileName}`)
+        .put(payload.file);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            const image = {
+              id: id,
+              title: payload.title,
+              url: url,
+              fileName: modifiedFileName,
+            };
+            firebase
+              .database()
+              .ref("traditionalart/" + image.id)
+              .set(image);
+            console.log(payload);
+            context.commit("addNewImage", image);
+          });
+        }
+      );
     },
     deleteImage(context, payload) {
+      console.log(payload.id);
+      firebase
+        .database()
+        .ref("traditionalart/" + payload.id)
+        .remove();
+
+      // Create a reference to the file to delete
+      const storageRef = firebase
+        .storage()
+        .ref(`traditionalart/${payload.fileName}`);
+
+
+      // Delete the file
+      storageRef
+        .delete()
+        .then(() => {
+          // File deleted successfully
+          console.log("File deleted successfully");
+        })
+        .catch((error) => {
+          // Uh-oh, an error occurred!
+          console.log(error);
+        });
+
+      context.commit("deleteImage", payload.id);
       console.log(payload);
-      context.commit('deleteImage', payload);
-    }
+    },
   },
   getters: {
     getImages(state) {
-      return state.dummyImages;
+      return state.images;
     },
   },
-}
+};
