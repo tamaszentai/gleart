@@ -21,7 +21,7 @@
 export default {
   created() {
     this.loadAbout();
-    this.printData();
+    this.loadHeroImage();
   },
   data() {
     return {
@@ -39,9 +39,14 @@ export default {
     async loadAbout() {
       await this.$store.dispatch("about/loadAbout");
     },
+    async loadHeroImage() {
+      await this.$store.dispatch("about/loadHeroImage");
+    },
+    updateImage() {
+      this.$store.dispatch("about/updateHeroImage", this.selectedFile);
+    },
     printData() {
-      // this.about = this.$store.getters["about/getAbout"];
-      console.log(this.$store.getters["about/getAbout"]);
+      console.log(this.selectedFile);
     }
   },
   computed: {

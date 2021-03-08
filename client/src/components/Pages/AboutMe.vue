@@ -15,6 +15,7 @@
 export default {
   created() {
     this.loadAbout();
+    this.loadHeroImage();
   },
   computed: {
     getBio() {
@@ -27,6 +28,9 @@ export default {
   methods: {
     async loadAbout() {
       await this.$store.dispatch("about/loadAbout");
+    },
+     async loadHeroImage() {
+      await this.$store.dispatch("about/loadHeroImage");
     },
   },
 };
