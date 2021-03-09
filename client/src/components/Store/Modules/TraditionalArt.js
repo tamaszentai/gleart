@@ -11,7 +11,8 @@ export default {
   },
   mutations: {
     setImages(state, payload) {
-      state.images = payload;
+      const reverseArray = [...payload].reverse();
+      state.images = reverseArray;
     },
     addNewImage(state, payload) {
       const newImage = {
@@ -20,94 +21,87 @@ export default {
         url: payload.url,
         fileName: payload.fileName,
       };
-      state.images.push(newImage);
+      state.images.unshift(newImage);
     },
     deleteImage(state, payload) {
-      const newState = state.images.filter(
-        (image) => image.id !== payload
-      );
+      const newState = state.images.filter((image) => image.id !== payload);
       state.images = newState;
     },
   },
   actions: {
     async loadImages(context) {
       let responseData = null;
-     await
-        firebase
+      await firebase
         .database()
         .ref("traditionalart/")
         .get()
         .then(function(snapshot) {
           if (snapshot.exists()) {
             responseData = snapshot.val();
-            
-          }
-          else {
+          } else {
             console.log("No data available");
           }
         });
 
-        console.log(responseData);
+      console.log(responseData);
 
-        const images = [];
+      const images = [];
 
       for (const key in responseData) {
-      const image = {
-        id: key,
-        fileName: responseData[key].fileName,
-        title: responseData[key].title,
-        url: responseData[key].url,
-      };
-      images.push(image);
+        const image = {
+          id: key,
+          fileName: responseData[key].fileName,
+          title: responseData[key].title,
+          url: responseData[key].url,
+        };
+        images.push(image);
       }
-      context.commit('setImages', images);
+      context.commit("setImages", images);
     },
-    addNewImage(context, payload) {
-      const id = uuidv4();
+
+    async addNewImage(context, payload) {
+      const id = Date.now() + uuidv4();
       const fileName = payload.file.name.split(".");
       const modifiedFileName = id + "." + fileName[1];
 
-      const storageRef = firebase
+      console.log(payload);
+      await firebase
         .storage()
-        .ref(`traditionalart/${modifiedFileName}`)
+        .ref("traditionalart/" + modifiedFileName)
         .put(payload.file);
-      storageRef.on(
-        `state_changed`,
-        (snapshot) => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
-          storageRef.snapshot.ref.getDownloadURL().then((url) => {
-            const image = {
-              id: id,
-              title: payload.title,
-              url: url,
-              fileName: modifiedFileName,
-            };
-            firebase
-              .database()
-              .ref("traditionalart/" + image.id)
-              .set(image);
-            console.log(payload);
-            context.commit("addNewImage", image);
-          });
-        }
-      );
+
+      await firebase
+        .storage()
+        .ref("traditionalart/" + modifiedFileName)
+        .getDownloadURL()
+        .then((imgUrl) => {
+          console.log(imgUrl);
+
+          const image = {
+            id: id,
+            title: payload.title,
+            url: imgUrl,
+            fileName: modifiedFileName,
+          };
+
+          firebase
+            .database()
+            .ref("traditionalart/" + image.id)
+            .set(image);
+          console.log(payload);
+          context.commit("addNewImage", image);
+        });
     },
-    deleteImage(context, payload) {
+
+    async deleteImage(context, payload) {
       console.log(payload.id);
-      firebase
+      await firebase
         .database()
         .ref("traditionalart/" + payload.id)
         .remove();
 
       // Create a reference to the file to delete
-      const storageRef = firebase
+      const storageRef = await firebase
         .storage()
         .ref(`traditionalart/${payload.fileName}`);
 
