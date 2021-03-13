@@ -9,9 +9,9 @@
         
         <div class="social">
           <ul>
-            <li><font-awesome-icon :icon="['fab', 'facebook']" /></li>
-            <li><font-awesome-icon :icon="['fab', 'instagram']" /></li>
-            <li><font-awesome-icon :icon="['fab', 'tiktok']" /></li>
+            <li><a href="https://www.facebook.com/GLeArt-276683485725990" target="_blank"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
+            <li><a href="https://www.instagram.com/insomnia_gleart" target="_blank"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
+            <li><a href="https://www.tiktok.com/@nimphasylum" target="_blank"><font-awesome-icon :icon="['fab', 'tiktok']" /></a></li>
           </ul>
           <hr></div>
       </div>
@@ -92,7 +92,16 @@ li {
 }
 
 li:hover {
-  color: rgb(146, 141, 141);
   cursor: pointer;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: whitesmoke
+}
+
+a:hover {
+  color: rgb(146, 141, 141);
 }
 </style>

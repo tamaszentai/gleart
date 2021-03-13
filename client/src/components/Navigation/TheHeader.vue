@@ -1,9 +1,9 @@
 <template>
   <header>
     <ul>
-      <li>
+      <!-- <li>
         <router-link to="/home"><h2>HOME</h2></router-link>
-      </li>
+      </li> -->
       <li>
         <router-link to="/about"><h2>ABOUT ME</h2></router-link>
       </li>
@@ -115,7 +115,7 @@ img {
   display: none;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.2);
-  min-width: 160px;
+  min-width: 12rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
