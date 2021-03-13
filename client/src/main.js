@@ -9,6 +9,16 @@ import store from "./components/Store/store.js";
 import BaseButton from "./components/UI/BaseButton.vue";
 import GalleryGrid from "./components/UI/GalleryGrid.vue";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faTiktok } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faFacebook)
+library.add(faInstagram)
+library.add(faTiktok)
+
 const app = createApp(App);
 
 const firebaseConfig = firebaseinit;
@@ -18,6 +28,7 @@ firebase.analytics();
 
 app.use(router);
 app.use(store);
+app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.component("base-button", BaseButton);
 app.component("gallery-grid", GalleryGrid);

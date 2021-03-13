@@ -5,7 +5,15 @@
         <img :src="getHeroImage" />
       </div>
       <div class="hero_info_container">
-        <p class="hero_info_text">{{ getBio }}</p>
+        <p class="hero_info_text"><i>{{ getBio }}</i></p>
+        
+        <div class="social">
+          <ul>
+            <li><font-awesome-icon :icon="['fab', 'facebook']" /></li>
+            <li><font-awesome-icon :icon="['fab', 'instagram']" /></li>
+            <li><font-awesome-icon :icon="['fab', 'tiktok']" /></li>
+          </ul>
+          <hr></div>
       </div>
     </div>
   </section>
@@ -29,7 +37,7 @@ export default {
     async loadAbout() {
       await this.$store.dispatch("about/loadAbout");
     },
-     async loadHeroImage() {
+    async loadHeroImage() {
       await this.$store.dispatch("about/loadHeroImage");
     },
   },
@@ -42,28 +50,57 @@ section {
 }
 
 .container {
-  margin: 3rem auto;
-  max-width: 1500px;
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+  height: 10%;
 }
 
 .hero_image_container {
-  display: inline;
-  vertical-align: middle;
+  
 }
 
 .hero_image_container img {
-  vertical-align: top;
-  width: 40%;
-  border-radius: 50%;
+  display: block;
+  margin: auto;
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
 }
 
 .hero_info_container {
+  
+}
+
+.hero_info_text {
+  margin: 1rem;
+  margin-left: 5rem;
+}
+
+.social {
+  margin-top: 20rem;
+}
+
+hr {
+  margin: auto;
+  width: 20rem;
+}
+
+ul {
+  text-align: center;
+  list-style: none;
+  padding: 0;
+  
+}
+
+li {
   display: inline-block;
-  vertical-align: middle;
-  width: 46%;
-  margin: 2%;
-  margin-top: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  overflow: scroll;
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+li:hover {
+  color: rgb(146, 141, 141);
+  cursor: pointer;
 }
 </style>

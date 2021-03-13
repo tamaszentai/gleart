@@ -1,20 +1,24 @@
 <template>
   <section>
+    <h2>DIGITAL ART</h2>
     <gallery-grid>
       <div
-        class="galleryCard"
+        class="gallery-panel"
         v-for="(image, index) in getImages"
         :key="image.id"
       >
-        <img :src="image.url" @click="openImage(image.url, index)" />{{
-          image.title
-        }}
+        <img :src="image.url" @click="openImage(image.url, index)" />
+        <div class="container">{{ image.title }}</div>
       </div>
     </gallery-grid>
     <transition name="fade-gallery" mode="out-in">
       <div v-if="isLightboxActive" class="lightbox" @click="closeImage">
-         <!-- <button @click="prevImage" class="previous">back</button> -->
-        <img :src="showImage || showNextImage" class="openedImage"  @click="closeImage"/>
+        <!-- <button @click="prevImage" class="previous">back</button> -->
+        <img
+          :src="showImage || showNextImage"
+          class="openedImage"
+          @click="closeImage"
+        />
         <p></p>
         <!-- <button @click="nextImage" class="next">forward</button> -->
       </div>
@@ -37,7 +41,7 @@ export default {
   },
   methods: {
     async loadImages() {
-     await this.$store.dispatch('digitalArt/loadImages');
+      await this.$store.dispatch("digitalArt/loadImages");
     },
     openImage(url, index) {
       this.isLightboxActive = true;
@@ -80,20 +84,29 @@ section {
   color: whitesmoke;
 }
 
-.galleryCard {
-  width: 250px;
-  height: 250px;
+h2 {
   text-align: center;
-  overflow: hidden;
 }
 
-.galleryCard img {
-  height: 200px;
-  width: auto;
-  display: block;
-  margin: auto;
+.gallery-panel img {
+  display:block;
+  margin:auto;
+  width: 80%;
+  height: 22vw;
+  object-fit: cover;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
   cursor: pointer;
-  overflow: hidden;
+}
+
+.container {
+  display:block;
+  margin:auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  text-align: center;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
 }
 
 .lightbox {
@@ -139,7 +152,7 @@ section {
 }
 
 .previous:hover,
-.next:hover  {
+.next:hover {
   color: orange;
 }
 </style>
