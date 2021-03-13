@@ -1,19 +1,39 @@
 <template>
   <section>
-    <div class="container">
+    <base-spinner v-if="isLoading"></base-spinner>
+    <div v-else-if="getBio && getHeroImage && !isLoading" class="container">
       <div class="hero_image_container">
         <img :src="getHeroImage" />
       </div>
       <div class="hero_info_container">
-        <p class="hero_info_text"><i>{{ getBio }}</i></p>
-        
+        <p class="hero_info_text">
+          <i>{{ getBio }}</i>
+        </p>
+
         <div class="social">
           <ul>
-            <li><a href="https://www.facebook.com/GLeArt-276683485725990" target="_blank"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
-            <li><a href="https://www.instagram.com/insomnia_gleart" target="_blank"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
-            <li><a href="https://www.tiktok.com/@nimphasylum" target="_blank"><font-awesome-icon :icon="['fab', 'tiktok']" /></a></li>
+            <li>
+              <a
+                href="https://www.facebook.com/GLeArt-276683485725990"
+                target="_blank"
+                ><font-awesome-icon :icon="['fab', 'facebook']"
+              /></a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/insomnia_gleart"
+                target="_blank"
+                ><font-awesome-icon :icon="['fab', 'instagram']"
+              /></a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@nimphasylum" target="_blank"
+                ><font-awesome-icon :icon="['fab', 'tiktok']"
+              /></a>
+            </li>
           </ul>
-          <hr></div>
+          <hr />
+        </div>
       </div>
     </div>
   </section>
@@ -21,6 +41,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isLoading: false
+    };
+  },
   created() {
     this.loadAbout();
     this.loadHeroImage();
@@ -35,10 +60,14 @@ export default {
   },
   methods: {
     async loadAbout() {
+      this.isLoading = true;
       await this.$store.dispatch("about/loadAbout");
+      this.isLoading = false;
     },
     async loadHeroImage() {
+      this.isLoading = true;
       await this.$store.dispatch("about/loadHeroImage");
+      this.isLoading = false;
     },
   },
 };
@@ -82,7 +111,6 @@ ul {
   text-align: center;
   list-style: none;
   padding: 0;
-  
 }
 
 li {
@@ -98,7 +126,7 @@ li:hover {
 a:link,
 a:visited,
 a:active {
-  color: whitesmoke
+  color: whitesmoke;
 }
 
 a:hover {

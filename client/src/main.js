@@ -8,6 +8,7 @@ import store from "./components/Store/store.js";
 
 import BaseButton from "./components/UI/BaseButton.vue";
 import GalleryGrid from "./components/UI/GalleryGrid.vue";
+import BaseSpinner from "./components/UI/BaseSpinner.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -32,6 +33,7 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.component("base-button", BaseButton);
 app.component("gallery-grid", GalleryGrid);
+app.component("base-spinner", BaseSpinner);
 
 router.isReady().then(function() {
   app.mount("#app");

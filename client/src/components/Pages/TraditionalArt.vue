@@ -1,7 +1,8 @@
 <template>
   <section>
     <h2>TRADITIONAL ART</h2>
-    <gallery-grid>
+    <base-spinner v-if="isLoading"></base-spinner>
+    <gallery-grid v-else-if="getImages && !isLoading">
       <div
         class="gallery-panel"
         v-for="(image, index) in getImages"
@@ -34,6 +35,7 @@ export default {
       isLightboxActive: false,
       tempImageUrl: "",
       tempIndex: null,
+      isLoading: false
     };
   },
   created() {
@@ -41,7 +43,9 @@ export default {
   },
   methods: {
     async loadImages() {
+      this.isLoading = true;
       await this.$store.dispatch("traditionalArt/loadImages");
+      this.isLoading = false;
     },
     openImage(url, index) {
       this.isLightboxActive = true;
