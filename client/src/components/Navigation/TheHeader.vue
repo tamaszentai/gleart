@@ -29,7 +29,7 @@
         <router-link to="/editdigitalart"><h2>EDIT DIGITALART</h2></router-link>
       </li>
        <li v-if="isAuthenticated">
-        <router-link to="/edittraditionalart"><h2>EDIT DIGITALART</h2></router-link>
+        <router-link to="/edittraditionalart"><h2>EDIT TRADITIONALART</h2></router-link>
       </li>
       <li v-if="isAuthenticated">
         <button @click="logout">Logout</button>

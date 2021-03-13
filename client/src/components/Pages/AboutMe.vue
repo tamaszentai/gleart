@@ -56,20 +56,12 @@ section {
   height: 10%;
 }
 
-.hero_image_container {
-  
-}
-
 .hero_image_container img {
   display: block;
   margin: auto;
   width: 100%;
   height: 30vw;
   object-fit: cover;
-}
-
-.hero_info_container {
-  
 }
 
 .hero_info_text {
