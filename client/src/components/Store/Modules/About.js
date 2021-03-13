@@ -38,7 +38,6 @@ export default {
           } else {
             console.log("No data available");
           }
-          console.log(responseData);
         });
       context.commit("setAbout", responseData);
     },
@@ -55,13 +54,11 @@ export default {
           } else {
             console.log("No data available");
           }
-          console.log(responseData);
         });
       context.commit("setHeroImage", responseData);
     },
 
     async updateAbout(context, payload) {
-      console.log(payload);
       await firebase
         .database()
         .ref("about/")
@@ -83,7 +80,6 @@ export default {
         .ref("about/" + modifiedFileName)
         .getDownloadURL()
         .then((imgUrl) => {
-          console.log(imgUrl);
 
           firebase
           .database()

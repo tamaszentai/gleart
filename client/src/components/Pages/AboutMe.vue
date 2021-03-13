@@ -54,6 +54,7 @@ section {
 .hero_image_container img {
   vertical-align: top;
   width: 40%;
+  border-radius: 50%;
 }
 
 .hero_info_container {

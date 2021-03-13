@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import firebase from 'firebase';
+// import store from './components/Store/store';
 
 import Home from "./components/Pages/Home.vue";
 import AboutMe from "./components/Pages/AboutMe.vue";
@@ -20,13 +22,28 @@ const router = createRouter({
     { path: "/digitalart", component: DigitalArt },
     { path: "/traditionalart", component: TraditionalArt },
     { path: "/contact", component: Contact },
-    { path: "/login", component: Login },
-    { path: "/editabout", component: EditAbout },
-    { path: "/editdigitalart", component: EditDigitalArt },
-    { path: "/edittraditionalart", component: EditTraditionalArt },
+    { path: "/login", component: Login,},
+    { path: "/editabout", component: EditAbout, meta: { requiresAuth: true } },
+    { path: "/editdigitalart", component: EditDigitalArt, meta: { requiresAuth: true }  },
+    { path: "/edittraditionalart", component: EditTraditionalArt, meta: { requiresAuth: true }  },
     { path: "/:notFound(.*)", component: NotFound }
   ],
   linkActiveClass: "active",
 });
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthenticated = firebase.auth().currentUser
+  if(isAuthenticated && to.path === '/') {
+    next('/home')
+  }
+  if (requiresAuth && !isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
+}) 
+
+
 
 export default router;

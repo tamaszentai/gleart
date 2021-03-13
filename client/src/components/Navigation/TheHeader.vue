@@ -1,5 +1,5 @@
 <template>
-  <header v-if="isHide">
+  <header>
     <ul>
       <li>
         <router-link to="/home"><h2>HOME</h2></router-link>
@@ -7,7 +7,6 @@
       <li>
         <router-link to="/about"><h2>ABOUT ME</h2></router-link>
       </li>
-      <!-- <li><router-link to="/home"><img src="../../assets/GLEART_logo.png"></router-link></li> -->
       <li class="dropdown">
         <h2 class="gallery" :class="isGalleryActiveComputed">GALLERY</h2>
         <div class="dropdown-content">
@@ -23,12 +22,29 @@
       <li>
         <router-link to="/contact"><h2>MESSAGE ME</h2></router-link>
       </li>
+       <li v-if="isAuthenticated">
+        <router-link to="/editabout"><h2>EDIT ABOUT</h2></router-link>
+      </li>
+      <li v-if="isAuthenticated">
+        <router-link to="/editdigitalart"><h2>EDIT DIGITALART</h2></router-link>
+      </li>
+       <li v-if="isAuthenticated">
+        <router-link to="/edittraditionalart"><h2>EDIT DIGITALART</h2></router-link>
+      </li>
+      <li v-if="isAuthenticated">
+        <button @click="logout">Logout</button>
+      </li>
     </ul>
   </header>
 </template>
 
 <script>
 export default {
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+    }
+  },
   computed: {
     isHide() {
       return this.$route.path !== "/login";
@@ -36,6 +52,9 @@ export default {
     isGalleryActiveComputed() {
       return this.$route.path === "/traditionalart" || this.$route.path === "/digitalart" ? "active" : "";
     },
+    isAuthenticated() {
+      return this.$store.getters['auth/isAuthenticated'];
+    }
   },
 };
 </script>

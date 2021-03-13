@@ -2,36 +2,48 @@
   <section>
     <h2>Login</h2>
     <form @submit.prevent="login">
-      <label>Username: </label>
-      <input type="text" v-model="userNameInput" required/>
+      <label>Email: </label>
+      <input type="email" v-model.trim="emailInput" required />
       <label>Password: </label>
-      <input type="password" v-model="passwordInput" required/>
+      <input type="password" v-model.trim="passwordInput" required />
       <button type="submit">Login</button>
     </form>
   </section>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        userNameInput: '',
-        passwordInput: ''
+export default {
+  data() {
+    return {
+      emailInput: "",
+      passwordInput: "",
+    };
+  },
+  methods: {
+    async login() {
+      if ((this.emailInput !== "") & (this.passwordInput !== "")) {
+        const loginData = {
+          email: this.emailInput,
+          password: this.passwordInput,
+        };
+        try {
+        await this.$store.dispatch('auth/login', loginData);
+        this.$router.replace('/home');
+      } catch (err) {
+        this.error = err.message || 'Failed to authenticate, try later.';
       }
+      }
+  
+
+      
     },
-    methods: {
-      login() {
-        if (this.userNameInput !== '' & this.passwordInput !== '') {
-          console.log(this.userNameInput, this.passwordInput);
-        }
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>
 section {
-  color: whitesmoke
+  color: whitesmoke;
 }
 h2 {
   text-align: center;
@@ -50,6 +62,6 @@ form {
 
 label {
   font-weight: bold;
-  color: whitesmoke
+  color: whitesmoke;
 }
 </style>
