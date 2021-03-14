@@ -6,9 +6,9 @@ import firebaseinit from './firebaseinit';
 import router from "./router.js";
 import store from "./components/Store/store.js";
 
-import BaseButton from "./components/UI/BaseButton.vue";
 import GalleryGrid from "./components/UI/GalleryGrid.vue";
 import BaseSpinner from "./components/UI/BaseSpinner.vue";
+import BaseDialog from "./components/UI/BaseDialog.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -31,9 +31,9 @@ app.use(router);
 app.use(store);
 app.component('font-awesome-icon', FontAwesomeIcon)
 
-app.component("base-button", BaseButton);
 app.component("gallery-grid", GalleryGrid);
 app.component("base-spinner", BaseSpinner);
+app.component("base-dialog", BaseDialog);
 
 router.isReady().then(function() {
   app.mount("#app");

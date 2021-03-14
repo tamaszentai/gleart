@@ -35,7 +35,7 @@ export default {
       isLightboxActive: false,
       tempImageUrl: "",
       tempIndex: null,
-      isLoading: false
+      isLoading: false,
     };
   },
   created() {
@@ -79,7 +79,7 @@ export default {
     showImage() {
       return this.$store.getters["digitalArt/getImages"][this.tempIndex].url;
     },
-  },
+  }
 };
 </script>
 

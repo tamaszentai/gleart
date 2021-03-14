@@ -44,9 +44,6 @@ html {
   background-attachment: fixed;
 }
 
-main, section {
-  min-height: calc(100vh - 7rem - 3.4rem);
-}
 
 .fade-component-enter-from,
 .fade-component-leave-to {
