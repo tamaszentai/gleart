@@ -45,14 +45,13 @@ div {
 dialog {
   position: fixed;
   top: 20vh;
-  left: 10%;
-  width: 80%;
+  width: 20%;
   z-index: 100;
   border-radius: 12px;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 0;
-  margin: 0;
+  margin: auto;
   overflow: hidden;
 }
 
@@ -61,6 +60,7 @@ header {
   color: white;
   width: 100%;
   padding: 1rem;
+  text-align: center;
 }
 
 header h2 {
@@ -73,15 +73,14 @@ section {
 
 menu {
   padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
+  margin: auto;
+  text-align: center;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   dialog {
     left: calc(50% - 20rem);
     width: 40rem;
   }
-}
+} */
 </style>

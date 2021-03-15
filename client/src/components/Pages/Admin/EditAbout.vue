@@ -7,11 +7,9 @@
       @close="closeModal"
     >
       <template #default>
-        <p>Unfortunately, at least one input value is invalid.</p>
-        <p>
-          Please check all inputs and make sure you enter at least a few
-          characters into each input field.
-        </p>
+       <div class="newImageContainer">
+         <img :src="newImage" />
+       </div>
       </template>
       <template #actions>
         <input
@@ -56,6 +54,8 @@ export default {
   methods: {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
+      console.log(this.selectedFile);
+      this.newImage = URL.createObjectURL(this.selectedFile);
     },
     setAbout() {
       this.$store.dispatch("about/updateAbout", this.about);
@@ -66,8 +66,9 @@ export default {
     async loadHeroImage() {
       await this.$store.dispatch("about/loadHeroImage");
     },
-    updateImage() {
-      this.$store.dispatch("about/updateHeroImage", this.selectedFile);
+   async updateImage() {
+      await this.$store.dispatch("about/updateHeroImage", this.selectedFile);
+      this.closeModal();
     },
     openModal() {
       this.changePicture = true;
@@ -100,9 +101,16 @@ export default {
 
 .newImageContainer {
   margin: auto;
-  border: solid red 2px;
-  width: 10rem;
-  height: 20rem;
+  width: auto;
+  height: auto;
+}
+
+.newImageContainer img {
+  display:block;
+  margin: auto;
+  max-width: 100% ;
+  /* max-height: 100%; */
+  object-fit: cover;
 }
 
 

@@ -85,6 +85,7 @@ section {
   height: 10%;
 }
 
+
 .hero_image_container img {
   display: block;
   margin: auto;
