@@ -21,6 +21,7 @@ export default {
 
     },
     sendEmail: (e) => {
+      console.log(process.env.VUE_APP_EMAILJS_SERVICE_ID);
       emailjs.sendForm(process.env.VUE_APP_EMAILJS_SERVICE_ID, process.env.VUE_APP_EMAILJS_TEMPLATE_ID, e.target, process.env.VUE_APP_EMAILJS_USER_ID)
         .then((result) => {
             console.log('SUCCESS!', result.status, result.text);
@@ -28,6 +29,7 @@ export default {
             e.target.reset();
         }, (error) => {
             console.log('FAILED...', error);
+            alert("Something went wrong");
         })
         
     }

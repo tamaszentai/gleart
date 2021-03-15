@@ -1,37 +1,37 @@
 <template>
   <div>
     <transition name="fade-gallery" mode="out-in">
-    <base-dialog
-      v-if="changePicture"
-      title="New Profile Picture"
-      @close="closeModal"
-    >
-      <template #default>
-       <div class="newImageContainer">
-         <img :src="newImage" />
-       </div>
-      </template>
-      <template #actions>
-        <input
-          type="file"
-          style="display: none"
-          @change="onFileSelected"
-          ref="fileInput"
-        />
+      <base-dialog
+        v-if="changePicture"
+        title="New Profile Picture"
+        @close="closeModal"
+      >
+        <template #default>
+          <div class="newImageContainer">
+            <img :src="newImage" />
+          </div>
+        </template>
+        <template #actions>
+          <input
+            type="file"
+            style="display: none"
+            @change="onFileSelected"
+            ref="fileInput"
+          />
 
-        <button @click="$refs.fileInput.click()">Choose new image</button>
-        <button @click="updateImage">Upload new image</button>
-      </template>
-    </base-dialog>
-</transition>
+          <button @click="$refs.fileInput.click()">Choose new image</button>
+          <button @click="updateImage">Upload new image</button>
+        </template>
+      </base-dialog>
+    </transition>
     <div class="container">
       <div class="imageContainer">
         <img :src="getHeroImage" />
         <button @click="openModal">Change Picture</button>
       </div>
       <div class="aboutContainer">
-        <textarea v-model="about" rows="20" cols="100"></textarea>
-        <button @click="setAbout">Update About</button>
+        <textarea v-model="about" rows="20" cols="100" required></textarea>
+        <button @click="updateAbout">Update About</button>
       </div>
     </div>
   </div>
@@ -57,8 +57,12 @@ export default {
       console.log(this.selectedFile);
       this.newImage = URL.createObjectURL(this.selectedFile);
     },
-    setAbout() {
-      this.$store.dispatch("about/updateAbout", this.about);
+    updateAbout() {
+      if (this.about === null || this.about === "") {
+        alert("Input field is empty");
+      } else {
+        this.$store.dispatch("about/updateAbout", this.about);
+      }
     },
     async loadAbout() {
       await this.$store.dispatch("about/loadAbout");
@@ -66,7 +70,7 @@ export default {
     async loadHeroImage() {
       await this.$store.dispatch("about/loadHeroImage");
     },
-   async updateImage() {
+    async updateImage() {
       await this.$store.dispatch("about/updateHeroImage", this.selectedFile);
       this.closeModal();
     },
@@ -106,13 +110,12 @@ export default {
 }
 
 .newImageContainer img {
-  display:block;
+  display: block;
   margin: auto;
-  max-width: 100% ;
+  max-width: 100%;
   /* max-height: 100%; */
   object-fit: cover;
 }
-
 
 .fade-gallery-enter-from,
 .fade-gallery-leave-to {

@@ -85,13 +85,27 @@ section {
   height: 10%;
 }
 
+.hero_image_container {
+  /* border: solid red 2px; */
+  width: 25%;
+  height: 36rem;
+}
+
 
 .hero_image_container img {
   display: block;
   margin: auto;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   height: 30vw;
   object-fit: cover;
+}
+
+.hero_info_container {
+    /* border: solid blue 2px; */
+    width: 75%;
+    height: 36rem;
+
 }
 
 .hero_info_text {
@@ -99,9 +113,6 @@ section {
   margin-left: 5rem;
 }
 
-.social {
-  margin-top: 20rem;
-}
 
 hr {
   margin: auto;
