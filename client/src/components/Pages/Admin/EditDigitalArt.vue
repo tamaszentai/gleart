@@ -114,6 +114,10 @@ content {
   margin: 0 auto;
 }
 
+.gallery-panel {
+  border: salmon solid 2px;
+}
+
 .gallery-panel img {
   display: block;
   margin: auto;
@@ -122,7 +126,6 @@ content {
   object-fit: cover;
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-  cursor: pointer;
 }
 
 .container {
